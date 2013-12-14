@@ -1,0 +1,55 @@
+<?php
+/**
+ * Example configurations on how to use the bakery.
+ *
+ * Please rename this file to "sites.php".
+ *
+ * For more information, please ask in the issue tracker at:
+ * https://github.com/kevinpapst/nginx-bakery/issues
+ *
+ * @author Kevin Papst
+ * @see https://github.com/kevinpapst/nginx-bakery
+ */
+return array(
+    'default' => array(
+        array(
+            'type'      => array('80-default', '443-default'),
+            'config'    => array(
+                'listen'            => '80',
+                'server_name'       => '_',
+                'root'              => '/var/www/nginx-bakery/default_site',
+                'index'             => 'index.html',
+                'includes'          => array(
+                    'includes/sites/default', '404', '50x', 'htaccess'
+                )
+            ),
+        ),
+    ),
+    'example.org' => array(
+        array(
+            'type'      => '80-redirect_server',
+            'config'    => array(
+                'server_name'   => 'example.org',
+                'target'        => 'www.example.org'
+            ),
+        ),
+        array(
+            'type'      => '443-redirect_server',
+            'config'    => array(
+                'server_name'   => 'example.org',
+                'target'        => 'www.example.org'
+            ),
+        ),
+        array(
+            'type'      => array('80-default', '443-default'),
+            'config'    => array(
+                'server_name'       => 'www.example.org',
+                'root'              => '/var/www/example.org/',
+                'index'             => 'index.php',
+                'includes'          => array(
+                    'favicon', 'php-fpm', 'htaccess'
+                )
+            ),
+        ),
+    )
+);
