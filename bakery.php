@@ -17,6 +17,11 @@ if (!file_exists(__DIR__ . '/sites.php')) {
 $CONFIG = include_once(__DIR__ . '/config.php');
 $SITES  = include_once(__DIR__ . '/sites.php');
 
+// make sure we have all directories we need
+if (!file_exists($CONFIG['target']['includes'])) { mkdir($CONFIG['target']['includes']);}
+if (!file_exists($CONFIG['target']['sites'])) { mkdir($CONFIG['target']['sites']);}
+
+// check if we can write the directories
 if (!is_writable($CONFIG['target']['includes']) || !is_writable($CONFIG['target']['sites'])) {
     die('Make sure the target directories are writable.'.PHP_EOL.'Check "' . $CONFIG['target']['includes'] . '" and "'.$CONFIG['target']['sites'].'".');
 }
