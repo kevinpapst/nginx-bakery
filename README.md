@@ -25,11 +25,10 @@ For the sake of out-of-the-box usage, all scripts rely on two paths:
 Installation
 ============
 
- ```
+```
 cd /var/www/
 git clone https://github.com/kevinpapst/nginx-bakery
-ln -s /var/www/nginx-bakery/nginx/includes /etc/nginx/includes
- ```
+```
  
 Usage
 =====
@@ -51,6 +50,6 @@ ln -s /var/www/nginx-bakery/nginx/includes /etc/nginx/includes
 
 2. Or you could copy the files over to their new location:
 ```
-cp /var/www/nginx-bakery/nginx/includes /etc/nginx/
+cp -r /var/www/nginx-bakery/nginx/includes /etc/nginx/
 cp /var/www/nginx-bakery/nginx/sites-enabled/* /etc/nginx/sites-enabled/
 ```
