@@ -6,13 +6,25 @@
  * @see https://github.com/kevinpapst/nginx-bakery
  */
 return array(
-    'target'        => __DIR__ . '/server/',
-    'server'        => array(
-        '80-default'            => 'recipes/80-default.conf',
-        '443-default'           => 'recipes/443-default.conf',
-        '80-redirect_server'    => 'recipes/80-redirect_server.conf',
-        '443-redirect_server'   => 'recipes/443-redirect_server.conf',
+    'target' => array(
+        // directory where parsed incldues will be stored
+        'includes'      => __DIR__ . '/nginx/includes',
+        // directory where generated server configs will be stored
+        'sites'         => __DIR__ . '/nginx/sites-enabled'
     ),
+    // full path to your certificates, change them to your needs and check certificates/README.md
+    'certificates' => array(
+        'default-crt'   => '/var/www/nginx-bakery/certificates/server.crt',
+        'default-key'   => '/var/www/nginx-bakery/certificates/server.key'
+    ),
+    // server recipes, mapping a name to a file
+    'server'        => array(
+        'http-default'            => 'recipes/80-default.conf',
+        'https-default'           => 'recipes/443-default.conf',
+        'http-redirect_server'    => 'recipes/80-redirect_server.conf',
+        'https-redirect_server'   => 'recipes/443-redirect_server.conf',
+    ),
+    // nginx includes, mapping a name to a file
     'includes'      => array(
         '404'               => 'includes/error/404.conf',
         '50x'               => 'includes/error/50x.conf',
