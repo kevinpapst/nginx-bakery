@@ -6,8 +6,9 @@
  * @see https://github.com/kevinpapst/nginx-bakery
  */
 return array(
+    // target directories for your generated nginx configs
     'target' => array(
-        // directory where parsed incldues will be stored
+        // directory where parsed includes will be stored
         'includes'      => __DIR__ . '/nginx/includes',
         // directory where generated server configs will be stored
         'sites'         => __DIR__ . '/nginx/sites-enabled'
@@ -17,14 +18,24 @@ return array(
         'default-crt'   => '/var/www/nginx-bakery/certificates/server.crt',
         'default-key'   => '/var/www/nginx-bakery/certificates/server.key'
     ),
-    // server recipes, mapping a name to a file
+    // a set of server definitions (one represents a site/domain)
+    // cookbooks can be reused across several domains, which only vary in a couple of variables
+    // this is a simple name-to-file mapping
+    'cookbooks'         => array(
+        'bigace-v2'     => 'cookbooks/bigace-v2.php',
+        'bigace-v3'     => 'cookbooks/bigace-v3.php',
+    ),
+    // server recipes, each one represents a server entry in your nginx config
+    // this is a simple name-to-file mapping
     'server'        => array(
         'http-default'            => 'recipes/80-default.conf',
         'https-default'           => 'recipes/443-default.conf',
         'http-redirect_server'    => 'recipes/80-redirect_server.conf',
         'https-redirect_server'   => 'recipes/443-redirect_server.conf',
     ),
-    // nginx includes, mapping a name to a file
+    // nginx includes - re-usable includes which allow to access variables when being "baked"
+    // note: they are generated once and afterwards all values are static
+    // this is a simple name-to-file mapping
     'includes'      => array(
         '404'               => 'includes/error/404.conf',
         '50x'               => 'includes/error/50x.conf',
@@ -42,5 +53,5 @@ return array(
         'smf-v2-prettyurls' => 'includes/software/smf-v2-prettyurls.conf',
         'wordpress'         => 'includes/software/wordpress.conf',
         'yourls'            => 'includes/software/yourls.conf'
-    )
+    ),
 );

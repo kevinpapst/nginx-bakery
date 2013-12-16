@@ -7,14 +7,16 @@
  */
 define('NXB_EOL', PHP_EOL);
 define('NXB_TAB', "    ");
-define('NXB_INC', __DIR__.'/includes/');
+define('NXB_INC', __DIR__.'/ingredients/');
 
 // sites.php will not be commited to the git repository, so you can safely keep your site configurations there
 if (!file_exists(__DIR__ . '/sites.php')) {
     die('There is no "sites.php". Please rename "sites.php.dist" to "sites.php"');
 }
 
+// bakery configs
 $CONFIG = include_once(__DIR__ . '/config.php');
+// users site config
 $SITES  = include_once(__DIR__ . '/sites.php');
 
 // make sure we have all directories we need
@@ -26,6 +28,7 @@ if (!is_writable($CONFIG['target']['includes']) || !is_writable($CONFIG['target'
     die('Make sure the target directories are writable.'.PHP_EOL.'Check "' . $CONFIG['target']['includes'] . '" and "'.$CONFIG['target']['sites'].'".');
 }
 
+// ====================================================================
 // fetch all include files
 $ritit = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(NXB_INC, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
 $r = array();
@@ -37,6 +40,7 @@ foreach ($ritit as $splFileInfo) {
     $r = array_merge_recursive($r, $path);
 }
 
+// ====================================================================
 // now generate all of them and save them in the target directory
 foreach($r as $incFolder => $includes)
 {
@@ -46,7 +50,7 @@ foreach($r as $incFolder => $includes)
     // target directory to store "includes"
     $includeTargetDir = $CONFIG['target']['includes'] . '/' . $incFolder;
 
-    // make sure the target directory exosts
+    // make sure the target directory exists
     if (!file_exists($includeTargetDir)) {
         if (!mkdir($includeTargetDir)) {
             die('Could not create target directory: ' . $includeTargetDir);
@@ -64,26 +68,89 @@ foreach($r as $incFolder => $includes)
     }
 }
 
+// ====================================================================
 // generate server configs
 foreach($SITES as $sitename => $siteServers)
 {
+    nginx_bakery_render_site($sitename, $siteServers);
+}
+
+/**
+ * Render a site with all its servers.
+ *
+ * @param $sitename
+ * @param $siteServers
+ * @throws Exception
+ */
+function nginx_bakery_render_site($sitename, $siteServers)
+{
+    global $CONFIG;
+
     $tplTarget  = $CONFIG['target']['sites'] . '/' . $sitename;
     ob_start();
 
     foreach($siteServers as $server)
     {
-
-        if (!is_array($server['type'])) {
-            $server['type'] = array($server['type']);
+        if (!isset($server['recipe']) && !isset($server['cookbook'])) {
+            throw new Exception('Site '.$sitename.' needs either a "cookbook" or a "recipe"');
         }
 
-        foreach($server['type'] as $serverType)
+        // recipe handling
+        if (isset($server['recipe']))
         {
-            nginx_bakery_render_type($serverType, $server['config']);
+            if (!is_array($server['recipe'])) {
+                $server['recipe'] = array($server['recipe']);
+            }
+
+            foreach($server['recipe'] as $serverType) {
+                nginx_bakery_render_type($sitename, $serverType, $server['config']);
+            }
+        }
+        // cookbooks are handled with recursion
+        else {
+            $cookbookConfig = nginx_bakery_config_from_cookbook($server['cookbook'], $server['config']);
+            ob_end_clean();
+            nginx_bakery_render_site($sitename, $cookbookConfig);
+            return;
         }
     }
+
     file_put_contents($tplTarget, ob_get_clean());
     echo "\nRendered config [$sitename] to: " . $tplTarget;
+}
+
+/**
+ * Return a full set of server configs for a cookbook and a config.
+ *
+ * @param $cookbook
+ * @param array $server
+ * @return array
+ * @throws Exception
+ */
+function nginx_bakery_config_from_cookbook($cookbook, array $server)
+{
+    global $CONFIG;
+    if (!isset($CONFIG['cookbooks'][$cookbook])) {
+        throw new Exception('Cookbook does not exist:' . $cookbook);
+    }
+
+    $fileName = $CONFIG['cookbooks'][$cookbook];
+
+    if (!file_exists(__DIR__ . '/' . $fileName)) {
+        throw new Exception('Cookbook file is missing:' . $fileName);
+    }
+
+    $config = include __DIR__ . '/' . $fileName;
+
+    array_walk_recursive($config, function(&$item, $key) use ($server) {
+        if (preg_match("/\%(.*)\%/", $item, $matches)) {
+            if(isset($server[$matches[1]])) {
+                $item = $server[$matches[1]];
+            }
+        }
+    });
+
+    return $config;
 }
 
 /**
@@ -117,13 +184,13 @@ function nginx_bakery_render_include($filename)
  * @param array $BAKERY the configuration from the user "site"
  * @throws Exception
  */
-function nginx_bakery_render_type($type, array $BAKERY)
+function nginx_bakery_render_type($serverName, $type, array $BAKERY)
 {
     // $CONFIG might be used within the included "server recipe"
     global $CONFIG;
 
     if (!isset($CONFIG['server'][$type])) {
-        throw new Exception('Server has no recipe: '. $type);
+        throw new Exception('Server has no recipe: '. $serverName);
     }
 
     echo NXB_EOL;
