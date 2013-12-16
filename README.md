@@ -30,10 +30,11 @@ cd /var/www/
 git clone https://github.com/kevinpapst/nginx-bakery
 ```
  
-Usage
-=====
+Initial setup
+=============
 
-- Edit "sites.php" to your needs
+- Create "sites-php" with `cp sites.php.dist sites.php`
+- Adjust "sites.php" to your needs (or use the example from sites.php.dist for a demo)
 - Run "php bakery.php"
 - Enable sites from the "nginx/sites-enabled" directory (some options are named below)
 
@@ -53,3 +54,20 @@ ln -s /var/www/nginx-bakery/nginx/includes /etc/nginx/includes
 cp -r /var/www/nginx-bakery/nginx/includes /etc/nginx/
 cp /var/www/nginx-bakery/nginx/sites-enabled/* /etc/nginx/sites-enabled/
 ```
+
+HOW-TO
+======
+Lets start with a wording definition.
+
+nginx-bakery knows three different stages of configuration files:
+1) cookbooks (a full set of several server definitions)
+2) recipes (single server definitions)
+3) ingredients (nginx includes)
+where each stage supports the usage of variables during the generation process.
+
+A set of server configurations and includes are "baked" - namely the process of parsing your configuration
+and creating static nginx config files and includes from your definitions.
+
+All your sites are defined in the file "sites.php". If you want to add cookbooks, recipes or ingredients, you need to adjust "config.php" by now.
+This might change in the future, but for now keeping them in a config file makes it easier to handle.
+
