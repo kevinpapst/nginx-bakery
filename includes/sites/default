@@ -1,7 +1,0 @@
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-
-    location = @404 {
-        return 404;
-    }
