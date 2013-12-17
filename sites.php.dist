@@ -17,7 +17,7 @@ return array(
             'config'    => array(
                 'listen'            => '80',
                 'server_name'       => '_',
-                'root'              => '/var/www/nginx-bakery/default_site',
+                'root'              =>  __DIR__ . '/default_site',
                 'index'             => 'index.html',
                 'includes'          => array(
                     'includes/sites/default', '404', '50x', 'htaccess'
@@ -34,7 +34,7 @@ return array(
             ),
         ),
         array(
-            'type'      => 'https-redirect_server',
+            'recipe'    => 'https-redirect_server',
             'config'    => array(
                 'server_name'   => 'example.org',
                 'target'        => 'www.example.org'
