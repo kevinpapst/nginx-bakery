@@ -13,7 +13,7 @@
 return array(
     'default' => array(
         array(
-            'type'      => array('http-default', 'https-default'),
+            'recipe'    => array('http-default', 'https-default'),
             'config'    => array(
                 'listen'            => '80',
                 'server_name'       => '_',
@@ -27,7 +27,7 @@ return array(
     ),
     'example.org' => array(
         array(
-            'type'      => 'http-redirect_server',
+            'recipe'    => 'http-redirect_server',
             'config'    => array(
                 'server_name'   => 'example.org',
                 'target'        => 'www.example.org'
@@ -41,7 +41,7 @@ return array(
             ),
         ),
         array(
-            'type'      => array('http-default', 'https-default'),
+            'recipe'    => array('http-default', 'https-default'),
             'config'    => array(
                 'server_name'       => 'www.example.org',
                 'root'              => '/var/www/example.org/',
@@ -51,5 +51,16 @@ return array(
                 )
             ),
         ),
-    )
+    ),
+    'my-wordpress-blog.org' => array(
+        array(
+            'cookbook'  => 'wordpress',
+            'config'    => array(
+                'server_name'   => 'my-wordpress-blog.org',
+                'redirect'      => 'www.my-wordpress-blog.org',
+                'root'          => '/var/www/my-wordpress-blog.org',
+                'include'       => 'includes/general/empty.conf'
+            ),
+        )
+    ),
 );
