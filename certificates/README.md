@@ -7,7 +7,7 @@ To generate a certificate, please refer to http://wiki.nginx.org/HttpSslModule#G
 or follow these steps (one by one, as you might have to enter some information):
 
 ```
-cd /var/www/nginx-bakery/certificates
+cd /opt/nginx-bakery/certificates
 openssl genrsa -out server.key 2048
 openssl req -new -key server.key -out server.csr
 openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
