@@ -215,16 +215,15 @@ function nginx_bakery_render_server(array $siteConfig)
             case 'server_name':
             case 'index':
             case 'root':
-                echo NXB_EOL . NXB_TAB . $configKey . ' ' . $configValue . ';';
+                echo NXB_TAB . $configKey . ' ' . $configValue . ';' . NXB_EOL;
                 break;
             case 'nginx':
-                echo NXB_EOL;
                 foreach($configValue as $nginxKey => $nginxValue) {
                     echo NXB_EOL . NXB_TAB . $nginxKey . ' ' . $nginxValue . ';';
                 }
+                echo NXB_EOL;
                 break;
             case 'includes':
-                echo NXB_EOL;
                 foreach($configValue as $incName) {
                     $inc = $incName;
                     if (isset($CONFIG['includes'][$incName])) {
