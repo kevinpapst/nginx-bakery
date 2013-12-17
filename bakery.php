@@ -8,6 +8,8 @@
 define('NXB_EOL', PHP_EOL);
 define('NXB_TAB', "    ");
 define('NXB_INC', __DIR__.'/ingredients/');
+define('NXB_VERSION', '0.1');
+define('NXB_VERBOSE', true);
 
 // sites.php will not be commited to the git repository, so you can safely keep your site configurations there
 if (!file_exists(__DIR__ . '/sites.php')) {
@@ -41,6 +43,10 @@ foreach ($ritit as $splFileInfo) {
 }
 
 // ====================================================================
+// header, just to let people know where they can find more usage infos
+echo NXB_EOL . 'nginx-bakery '.NXB_VERSION.' - more infos at https://github.com/kevinpapst/nginx-bakery' . NXB_EOL;
+
+// ====================================================================
 // now generate all of them and save them in the target directory
 foreach($r as $incFolder => $includes)
 {
@@ -64,7 +70,7 @@ foreach($r as $incFolder => $includes)
         ob_start();
         nginx_bakery_render_include(NXB_INC . $incFolder . '/' .$incFilename);
         file_put_contents($incTarget, ob_get_clean());
-        echo "\nRendered include: " . $incFolder . '/' .$incFilename;
+        nginx_bakery_log("Rendered include: " . $incFolder . '/' .$incFilename);
     }
 }
 
@@ -73,6 +79,19 @@ foreach($r as $incFolder => $includes)
 foreach($SITES as $sitename => $siteServers)
 {
     nginx_bakery_render_site($sitename, $siteServers);
+}
+
+echo NXB_EOL;
+
+// ====================================================================
+// Script stuff ends here - functions follow
+// ====================================================================
+
+function nginx_bakery_log($msg)
+{
+    if (NXB_VERBOSE) {
+        echo NXB_EOL . $msg;
+    }
 }
 
 /**
@@ -116,7 +135,7 @@ function nginx_bakery_render_site($sitename, $siteServers)
     }
 
     file_put_contents($tplTarget, ob_get_clean());
-    echo "\nRendered config [$sitename] to: " . $tplTarget;
+    nginx_bakery_log("Rendered config [$sitename] to: " . $tplTarget);
 }
 
 /**
