@@ -20,13 +20,13 @@ Directories
 For the sake of out-of-the-box usage, all scripts rely on two paths:
 
 - /etc/nginx/             - as base configuration directory for nginx
-- /var/www/nginx-bakery/  - as installation directory of this library
+- /opt/nginx-bakery/      - as installation directory of this library
 
 Installation
 ============
 
 ```
-cd /var/www/
+cd /opt/
 git clone https://github.com/kevinpapst/nginx-bakery
 ```
  
@@ -45,14 +45,14 @@ There are several ways on how to activate the generated configs ... use your ima
 1. This is the most easy one and will work, if you manage all sites with this library:
 ```
 mv /etc/nginx/sites-enabled /etc/nginx/backup_sites-enabled
-ln -s /var/www/nginx-bakery/nginx/sites-enabled /etc/nginx/sites-enabled
-ln -s /var/www/nginx-bakery/nginx/includes /etc/nginx/includes
+ln -s /opt/nginx-bakery/nginx/sites-enabled /etc/nginx/sites-enabled
+ln -s /opt/nginx-bakery/nginx/includes /etc/nginx/includes
 ```
 
 2. Or you could copy the files over to their new location:
 ```
-cp -r /var/www/nginx-bakery/nginx/includes /etc/nginx/
-cp /var/www/nginx-bakery/nginx/sites-enabled/* /etc/nginx/sites-enabled/
+cp -r /opt/nginx-bakery/nginx/includes /etc/nginx/
+cp /opt/nginx-bakery/nginx/sites-enabled/* /etc/nginx/sites-enabled/
 ```
 
 HOW-TO

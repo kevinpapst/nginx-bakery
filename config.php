@@ -15,8 +15,8 @@ return array(
     ),
     // full path to your certificates, change them to your needs and check certificates/README.md
     'certificates' => array(
-        'default-crt'   => '/var/www/nginx-bakery/certificates/server.crt',
-        'default-key'   => '/var/www/nginx-bakery/certificates/server.key'
+        'default-crt'   => __DIR__ . '/certificates/server.crt',
+        'default-key'   => __DIR__ . '/certificates/server.key'
     ),
     // a set of server definitions (one represents a site/domain)
     // cookbooks can be reused across several domains, which only vary in a couple of variables

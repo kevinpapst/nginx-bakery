@@ -11,7 +11,7 @@ define('NXB_INC', __DIR__.'/ingredients/');
 
 // sites.php will not be commited to the git repository, so you can safely keep your site configurations there
 if (!file_exists(__DIR__ . '/sites.php')) {
-    die('There is no "sites.php". Please rename "sites.php.dist" to "sites.php"');
+    die(NXB_EOL . 'There is no "sites.php". Please rename "sites.php.dist" to "sites.php"'.NXB_EOL);
 }
 
 // bakery configs
