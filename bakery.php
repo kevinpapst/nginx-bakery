@@ -81,7 +81,7 @@ foreach($SITES as $sitename => $siteServers)
     nginx_bakery_render_site($sitename, $siteServers);
 }
 
-echo NXB_EOL;
+echo NXB_EOL . NXB_EOL;
 
 // ====================================================================
 // Script stuff ends here - functions follow
