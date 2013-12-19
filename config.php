@@ -54,10 +54,10 @@ return array(
         'piwik-tracking'    => 'includes/software/piwik-tracking.conf',
         'smf-v1'            => 'includes/software/smf-v1.conf',
         'smf-v2-prettyurls' => 'includes/software/smf-v2-prettyurls.conf',
-        'wordpress'         => 'includes/software/wordpress.conf',
-        'wordpress-hide'    => 'includes/software/wordpress-hide.conf',
-        'wordpress-301-ssl' => 'includes/software/wordpress-redirect-ssl.conf',
-        'wordpress-admin'   => 'includes/software/wordpress-admin.conf',
+        'wordpress'         => 'includes/wordpress/common.conf',
+        'wordpress-hide'    => 'includes/wordpress/hide-login.conf',
+        'wordpress-301-ssl' => 'includes/wordpress/redirect-ssl.conf',
+        'wordpress-admin'   => 'includes/wordpress/administration.conf',
         'yourls'            => 'includes/software/yourls.conf'
     ),
 );

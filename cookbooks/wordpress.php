@@ -41,7 +41,7 @@ return array(
             'root'              => '%root%',
             'index'             => 'index.php',
             'includes'          => array(
-                '%include%', 'favicon', 'wordpress', 'wordpress-admin', 'cache-assets', 'htaccess', 'hide-headers'
+                '%include_ssl%', 'favicon', 'wordpress', 'wordpress-admin', 'cache-assets', 'htaccess', 'hide-headers'
             )
         ),
     ),
