@@ -23,13 +23,25 @@ return array(
         ),
     ),
     array(
-        'recipe'    => array('http-default', 'https-default'),
+        'recipe'    => array('http-default'),
         'config'    => array(
             'server_name'       => '%server_name%',
             'root'              => '%root%',
             'index'             => 'index.php',
             'includes'          => array(
-                '%include%', 'favicon', 'wordpress', 'cache-assets', 'htaccess'
+                // optional use wordpress-301-ssl instead of wordpress-hide
+                '%include%', 'favicon', 'wordpress', 'wordpress-hide', 'cache-assets', 'htaccess', 'hide-headers'
+            )
+        ),
+    ),
+    array(
+        'recipe'    => array('https-default'),
+        'config'    => array(
+            'server_name'       => '%server_name%',
+            'root'              => '%root%',
+            'index'             => 'index.php',
+            'includes'          => array(
+                '%include%', 'favicon', 'wordpress', 'wordpress-admin', 'cache-assets', 'htaccess', 'hide-headers'
             )
         ),
     ),

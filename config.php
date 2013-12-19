@@ -47,6 +47,7 @@ return array(
         'php-fpm'           => 'includes/general/php-fpm.conf',
         'robots'            => 'includes/general/robots.conf',
         'ssl'               => 'includes/general/ssl-site.conf',
+        'hide-headers'      => 'includes/general/hide-headers.conf',
         'bigace-v2'         => 'includes/software/bigace-v2.conf',
         'bigace-v3'         => 'includes/software/bigace-v3.conf',
         'dokuwiki'          => 'includes/software/dokuwiki.conf',
@@ -54,6 +55,9 @@ return array(
         'smf-v1'            => 'includes/software/smf-v1.conf',
         'smf-v2-prettyurls' => 'includes/software/smf-v2-prettyurls.conf',
         'wordpress'         => 'includes/software/wordpress.conf',
+        'wordpress-hide'    => 'includes/software/wordpress-hide.conf',
+        'wordpress-301-ssl' => 'includes/software/wordpress-redirect-ssl.conf',
+        'wordpress-admin'   => 'includes/software/wordpress-admin.conf',
         'yourls'            => 'includes/software/yourls.conf'
     ),
 );
