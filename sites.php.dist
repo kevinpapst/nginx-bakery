@@ -59,7 +59,8 @@ return array(
                 'server_name'   => 'my-wordpress-blog.org',
                 'redirect'      => 'www.my-wordpress-blog.org',
                 'root'          => '/var/www/my-wordpress-blog.org',
-                'include'       => 'includes/general/empty.conf'
+                'include'       => 'includes/general/empty.conf',
+                'include_ssl'   => 'includes/general/empty.conf'
             ),
         )
     ),
