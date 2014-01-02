@@ -11,7 +11,7 @@
  * @see https://github.com/kevinpapst/nginx-bakery
  */
 return array(
-    'default' => array(
+    '0-default' => array(
         array(
             'recipe'    => array('http-default', 'https-default'),
             'config'    => array(

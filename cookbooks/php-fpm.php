@@ -29,7 +29,7 @@ return array(
             'root'              => '%root%',
             'index'             => 'index.php',
             'includes'          => array(
-                '%include%', 'favicon', 'php-fpm', 'cache-assets', 'htaccess'
+                '%include%', 'favicon', 'php-fpm', 'robots', 'cache-assets', 'htaccess'
             )
         ),
     ),

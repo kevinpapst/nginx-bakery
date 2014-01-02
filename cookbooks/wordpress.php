@@ -30,7 +30,7 @@ return array(
             'index'             => 'index.php',
             'includes'          => array(
                 // optional use wordpress-301-ssl instead of wordpress-hide
-                '%include%', 'favicon', 'wordpress', 'wordpress-hide', 'cache-assets', 'htaccess', 'hide-headers'
+                '%include%', 'favicon', 'wordpress', 'wordpress-phpfpm', 'wordpress-hide', 'cache-assets', 'htaccess', 'hide-headers'
             )
         ),
     ),
@@ -41,7 +41,7 @@ return array(
             'root'              => '%root%',
             'index'             => 'index.php',
             'includes'          => array(
-                '%include_ssl%', 'favicon', 'wordpress', 'wordpress-admin', 'cache-assets', 'htaccess', 'hide-headers'
+                '%include_ssl%', 'favicon', 'wordpress', 'wordpress-phpfpm', 'wordpress-admin', 'cache-assets', 'htaccess', 'hide-headers'
             )
         ),
     ),

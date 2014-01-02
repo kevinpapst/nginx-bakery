@@ -55,6 +55,7 @@ return array(
         'smf-v1'            => 'includes/software/smf-v1.conf',
         'smf-v2-prettyurls' => 'includes/software/smf-v2-prettyurls.conf',
         'wordpress'         => 'includes/wordpress/common.conf',
+        'wordpress-phpfpm'  => 'includes/wordpress/php-fpm.conf',
         'wordpress-hide'    => 'includes/wordpress/hide-login.conf',
         'wordpress-301-ssl' => 'includes/wordpress/redirect-ssl.conf',
         'wordpress-admin'   => 'includes/wordpress/administration.conf',
