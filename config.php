@@ -11,7 +11,7 @@ return array(
         // directory where parsed includes will be stored
         'includes'      => __DIR__ . '/nginx/includes',
         // directory where generated server configs will be stored
-        'sites'         => __DIR__ . '/nginx/sites-enabled'
+        'sites'         => __DIR__ . '/nginx/sites-enabled',
     ),
     // full path to your certificates, change them to your needs and check certificates/README.md
     'certificates' => array(
@@ -37,7 +37,7 @@ return array(
     ),
     // nginx includes - re-usable includes which allow to access variables when being "baked"
     // note: they are generated once and afterwards all values are static
-    // this is a simple name-to-file mapping
+    // this is a simple name-to-file mapping to be used in
     'includes'      => array(
         '404'               => 'includes/error/404.conf',
         '50x'               => 'includes/error/50x.conf',
@@ -59,6 +59,7 @@ return array(
         'wordpress-hide'    => 'includes/wordpress/hide-login.conf',
         'wordpress-301-ssl' => 'includes/wordpress/redirect-ssl.conf',
         'wordpress-admin'   => 'includes/wordpress/administration.conf',
+        'kimai'             => 'includes/software/kimai.conf',
         'yourls'            => 'includes/software/yourls.conf'
     ),
 );
