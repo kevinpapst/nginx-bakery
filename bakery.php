@@ -136,7 +136,12 @@ function nginx_bakery_render_site($sitename, $siteServers)
         }
         // cookbooks are handled with recursion
         else {
-            $cookbookConfig = nginx_bakery_config_from_cookbook($server['cookbook'], $server['config']);
+            // allow people to overrides single entries in cookbooks
+            if (!isset($server['overrides'])) {
+                $server['overrides'] = array();
+            }
+
+            $cookbookConfig = nginx_bakery_config_from_cookbook($server['cookbook'], $server['config'], $server['overrides']);
             nginx_bakery_render_site($sitename, $cookbookConfig);
             return;
         }
@@ -151,7 +156,7 @@ function nginx_bakery_render_site($sitename, $siteServers)
  * @return array
  * @throws Exception
  */
-function nginx_bakery_config_from_cookbook($cookbook, array $server)
+function nginx_bakery_config_from_cookbook($cookbook, array $server, array $overrides)
 {
     global $CONFIG;
     if (!isset($CONFIG['cookbooks'][$cookbook])) {
@@ -164,9 +169,20 @@ function nginx_bakery_config_from_cookbook($cookbook, array $server)
         throw new Exception('Cookbook file is missing:' . $fileName);
     }
 
-    $config = include __DIR__ . '/' . $fileName;
+    $configBook = include __DIR__ . '/' . $fileName;
 
-    array_walk_recursive($config, function(&$item, $key) use ($server) {
+    // override the default cookbook values with the supplied configuration
+    // TODO - find a more elegant way
+    if (!empty($overrides)) {
+        foreach($overrides as $k => $v) {
+            if (isset($overrides[$k])) {
+                $configBook[$k] = array_merge($configBook[$k], $overrides[$k]);
+            }
+        }
+    }
+
+    // dynamic replacer in the style %somekey%
+    array_walk_recursive($configBook, function(&$item, $key) use ($server) {
         if (preg_match("/\%(.*)\%/", $item, $matches)) {
             if(isset($server[$matches[1]])) {
                 $item = $server[$matches[1]];
@@ -174,7 +190,7 @@ function nginx_bakery_config_from_cookbook($cookbook, array $server)
         }
     });
 
-    return $config;
+    return $configBook;
 }
 
 /**
