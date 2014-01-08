@@ -66,9 +66,13 @@ foreach($r as $incFolder => $includes)
     // render includes
     foreach($includes as $incFilename)
     {
-        $incTarget = $includeTargetDir . '/' . $incFilename;
         ob_start();
+
+        // do the magic
         nginx_bakery_render_include(NXB_INC . $incFolder . '/' .$incFilename);
+
+        // get output buffer and save it as "include" config file
+        $incTarget = $includeTargetDir . '/' . $incFilename;
         file_put_contents($incTarget, ob_get_clean());
         nginx_bakery_log("Rendered include: " . $incFolder . '/' .$incFilename);
     }
@@ -78,7 +82,15 @@ foreach($r as $incFolder => $includes)
 // generate server configs
 foreach($SITES as $sitename => $siteServers)
 {
+    ob_start();
+
+    // do the magix
     nginx_bakery_render_site($sitename, $siteServers);
+
+    // get output buffer and save it as "server" config file
+    $tplTarget = $CONFIG['target']['sites'] . '/' . $sitename;
+    file_put_contents($tplTarget, ob_get_clean());
+    nginx_bakery_log("Rendered config [$sitename] to: " . $tplTarget);
 }
 
 echo NXB_EOL . NXB_EOL;
@@ -105,9 +117,6 @@ function nginx_bakery_render_site($sitename, $siteServers)
 {
     global $CONFIG;
 
-    $tplTarget  = $CONFIG['target']['sites'] . '/' . $sitename;
-    ob_start();
-
     foreach($siteServers as $server)
     {
         if (!isset($server['recipe']) && !isset($server['cookbook'])) {
@@ -128,14 +137,10 @@ function nginx_bakery_render_site($sitename, $siteServers)
         // cookbooks are handled with recursion
         else {
             $cookbookConfig = nginx_bakery_config_from_cookbook($server['cookbook'], $server['config']);
-            ob_end_clean();
             nginx_bakery_render_site($sitename, $cookbookConfig);
             return;
         }
     }
-
-    file_put_contents($tplTarget, ob_get_clean());
-    nginx_bakery_log("Rendered config [$sitename] to: " . $tplTarget);
 }
 
 /**
