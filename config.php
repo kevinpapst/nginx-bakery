@@ -12,6 +12,8 @@ return array(
         'includes'      => __DIR__ . '/nginx/includes',
         // directory where generated server configs will be stored
         'sites'         => __DIR__ . '/nginx/sites-enabled',
+        // external files being included while parsing can be defined by a key-value mapping of source => target directory
+        'externals'     => array()
     ),
     // full path to your certificates, change them to your needs and check certificates/README.md
     'certificates' => array(
@@ -34,6 +36,7 @@ return array(
         'https-default'           => 'recipes/443-default.conf',
         'http-redirect_server'    => 'recipes/80-redirect_server.conf',
         'https-redirect_server'   => 'recipes/443-redirect_server.conf',
+        'plaintext'               => 'recipes/plaintext.conf'
     ),
     // nginx includes - re-usable includes which allow to access variables when being "baked"
     // note: they are generated once and afterwards all values are static
