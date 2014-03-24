@@ -159,14 +159,17 @@ function nginx_bakery_render_site($sitename, $siteServers)
 function nginx_bakery_config_from_cookbook($cookbook, array $server, array $overrides)
 {
     global $CONFIG;
-    if (!isset($CONFIG['cookbooks'][$cookbook])) {
-        throw new Exception('Cookbook does not exist:' . $cookbook);
+
+    $fileName = null;
+
+    if (isset($CONFIG['cookbooks'][$cookbook])) {
+        $fileName = $CONFIG['cookbooks'][$cookbook];
+    } else {
+        $fileName = 'cookbooks/' . $cookbook . '.php';
     }
 
-    $fileName = $CONFIG['cookbooks'][$cookbook];
-
-    if (!file_exists(__DIR__ . '/' . $fileName)) {
-        throw new Exception('Cookbook file is missing:' . $fileName);
+    if ($fileName === null || !file_exists(__DIR__ . '/' . $fileName)) {
+        throw new Exception('Cookbook does not exist or file is missing:' . $cookbook);
     }
 
     $configBook = include __DIR__ . '/' . $fileName;

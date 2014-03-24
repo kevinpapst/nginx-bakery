@@ -22,7 +22,7 @@ return array(
     ),
     // a set of server definitions (one represents a site/domain)
     // cookbooks can be reused across several domains, which only vary in a couple of variables
-    // this is a simple name-to-file mapping
+    // this is a simple name-to-file mapping, to allow placing cookbooks outside the default directory "cookbooks/"
     'cookbooks'         => array(
         'bigace-v2'     => 'cookbooks/bigace-v2.php',
         'bigace-v3'     => 'cookbooks/bigace-v3.php',
