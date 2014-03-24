@@ -1,11 +1,16 @@
 <?php
 /**
- * Cookbook for a wordpress site.
+ * Cookbook for a wordpress site:
+ *
+ * - which is browsable one http and https
+ * - which hides login and admin functions on http
+ * - which allows login and administration ONLY on https
  *
  * @param redirect
  * @param server_name
  * @param root
  * @param include
+ * @param include_ssl
  */
 return array(
     array(
