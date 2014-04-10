@@ -66,6 +66,10 @@ foreach($r as $incFolder => $includes)
     // render includes
     foreach($includes as $incFilename)
     {
+        if ($incFilename == '.gitignore') {
+            continue;
+        }
+
         ob_start();
 
         // do the magic
