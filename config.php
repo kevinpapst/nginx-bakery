@@ -28,6 +28,7 @@ return array(
         'bigace-v3'     => 'cookbooks/bigace-v3.php',
         'wordpress'     => 'cookbooks/wordpress.php',
         'php-fpm'       => 'cookbooks/php-fpm.php',
+        'cdn'           => 'cookbooks/cdn.php',
     ),
     // server recipes, each one represents a server entry in your nginx config
     // this is a simple name-to-file mapping
