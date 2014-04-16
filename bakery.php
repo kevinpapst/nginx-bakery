@@ -168,8 +168,10 @@ function nginx_bakery_config_from_cookbook($cookbook, array $server, array $over
 
     if (isset($CONFIG['cookbooks'][$cookbook])) {
         $fileName = $CONFIG['cookbooks'][$cookbook];
-    } else {
+    } else if (file_exists(__DIR__ . '/cookbooks/' . $cookbook . '.php')) {
         $fileName = 'cookbooks/' . $cookbook . '.php';
+    } else {
+        $fileName = $cookbook;
     }
 
     if ($fileName === null || !file_exists(__DIR__ . '/' . $fileName)) {
