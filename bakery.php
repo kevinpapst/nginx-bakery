@@ -8,7 +8,7 @@
 define('NXB_EOL', PHP_EOL);
 define('NXB_TAB', "    ");
 define('NXB_INC', __DIR__.'/ingredients/');
-define('NXB_VERSION', '0.1');
+define('NXB_VERSION', '0.2');
 define('NXB_VERBOSE', true);
 
 // sites.php will not be commited to the git repository, so you can safely keep your site configurations there
@@ -18,6 +18,13 @@ if (!file_exists(__DIR__ . '/sites.php')) {
 
 // bakery configs
 $CONFIG = include_once(__DIR__ . '/config.php');
+// allow to override or add new settings
+if (file_exists(__DIR__ . '/config.local.php')) {
+    $CONFIG2 = include_once(__DIR__ . '/config.local.php');
+    $CONFIG = array_merge_recursive($CONFIG, $CONFIG2);
+    unset($CONFIG2);
+}
+
 // users site config
 $SITES  = include_once(__DIR__ . '/sites.php');
 
@@ -208,7 +215,6 @@ function nginx_bakery_config_from_cookbook($cookbook, array $server, array $over
  * $CONFIG can be used in the included server-recipe.
  *
  * @param $filename
- * @param array $BAKERY
  */
 function nginx_bakery_render_include($filename)
 {
@@ -229,6 +235,7 @@ function nginx_bakery_render_include($filename)
  *
  * Both $BAKERY and $CONFIG can be used in the included server-recipe.
  *
+ * @param $serverName
  * @param $type
  * @param array $BAKERY the configuration from the user "site"
  * @throws Exception
@@ -241,6 +248,9 @@ function nginx_bakery_render_type($serverName, $type, array $BAKERY)
     if (!isset($CONFIG['server'][$type])) {
         throw new Exception('Server has no recipe: '. $serverName);
     }
+
+    // inject the $serverName as new field "_project_key"
+    $BAKERY['_project_key'] = $serverName;
 
     echo NXB_EOL;
     include $CONFIG['server'][$type];
@@ -280,6 +290,8 @@ function nginx_bakery_render_server(array $siteConfig)
                     }
                     echo NXB_EOL . NXB_TAB . 'include' . ' ' . $inc . ';';
                 }
+                break;
+            case '_project_key':
                 break;
             default:
                 throw new Exception('Unsupported configuration key: ' . $configKey);

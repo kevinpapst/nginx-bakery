@@ -17,8 +17,18 @@ return array(
     ),
     // full path to your certificates, change them to your needs and check certificates/README.md
     'certificates' => array(
-        'default-crt'   => __DIR__ . '/certificates/server.crt',
-        'default-key'   => __DIR__ . '/certificates/server.key'
+        // we look for "default" only if no side specific certificate can be found
+        'default'       => array(
+            'crt'   => __DIR__ . '/certificates/server.crt',
+            'key'   => __DIR__ . '/certificates/server.key'
+        ),
+        /*
+        // e.g. the site 'example.org' would look like:
+        'example.org'       => array(
+            'crt'   => __DIR__ . '/certificates/example_org.crt',
+            'key'   => __DIR__ . '/certificates/example_org.key'
+        ),
+        */
     ),
     // a set of server definitions (one represents a site/domain)
     // cookbooks can be reused across several domains, which only vary in a couple of variables

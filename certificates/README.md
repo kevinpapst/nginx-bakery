@@ -16,7 +16,7 @@ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 Attention
 =========
 Be warned, that the include `includes/general/ssl.conf` uses this exact name and location.
-If you do not want the filename "server" or want to use another location (highly recommended),
+If you do not want the filename "server" or want to use another location (recommended),
 change "config.php" accordingly and regenerate the files.
 
 Warning!
