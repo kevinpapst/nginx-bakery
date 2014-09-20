@@ -47,6 +47,8 @@ return array(
         'https-default'           => 'recipes/443-default.conf',
         'http-redirect_server'    => 'recipes/80-redirect_server.conf',
         'https-redirect_server'   => 'recipes/443-redirect_server.conf',
+        'http-redirect_static'    => 'recipes/80-redirect_static.conf',
+        'https-redirect_static'   => 'recipes/443-redirect_static.conf',
         'plaintext'               => 'recipes/plaintext.conf'
     ),
     // nginx includes - re-usable includes which allow to access variables when being "baked"
