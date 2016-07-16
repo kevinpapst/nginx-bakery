@@ -21,7 +21,7 @@ $CONFIG = include_once(__DIR__ . '/config.php');
 // allow to override or add new settings
 if (file_exists(__DIR__ . '/config.local.php')) {
     $CONFIG2 = include_once(__DIR__ . '/config.local.php');
-    $CONFIG = array_merge_recursive($CONFIG, $CONFIG2);
+    $CONFIG = array_replace_recursive($CONFIG, $CONFIG2);
     unset($CONFIG2);
 }
 
