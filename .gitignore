@@ -3,3 +3,5 @@ nginx/sites-enabled/*
 nginx/includes/*
 .idea
 config.local.php
+certificates/server.crt
+certificates/server.key
