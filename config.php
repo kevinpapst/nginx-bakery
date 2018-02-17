@@ -77,6 +77,7 @@ return array(
         'wordpress-301-ssl' => 'includes/wordpress/redirect-ssl.conf',
         'wordpress-admin'   => 'includes/wordpress/administration.conf',
         'kimai'             => 'includes/software/kimai.conf',
-        'yourls'            => 'includes/software/yourls.conf'
+        'yourls'            => 'includes/software/yourls.conf',
+        'jekyll'            => 'includes/software/jekyll.conf',
     ),
 );
