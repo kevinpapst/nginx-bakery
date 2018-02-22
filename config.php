@@ -62,7 +62,6 @@ return array(
         'favicon'           => 'includes/general/favicon.conf',
         'php-fpm'           => 'includes/general/php-fpm.conf',
         'robots'            => 'includes/general/robots.conf',
-        'ssl'               => 'includes/general/ssl-site.conf',
         'empty'             => 'includes/general/empty.conf',
         'hide-headers'      => 'includes/general/hide-headers.conf',
         'bigace-v2'         => 'includes/software/bigace-v2.conf',
