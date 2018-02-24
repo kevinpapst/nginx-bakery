@@ -16,6 +16,8 @@ return array(
         'externals'     => array()
     ),
     'options' => array(
+        'php_fastcgi_pass' => 'unix:/run/php/php7.1-fpm.sock',
+        'php_open_basedir' => '/tmp/',
         'access_log' => 'off',
     ),
     // full path to your certificates, change them to your needs and check certificates/README.md
@@ -82,5 +84,7 @@ return array(
         'symfony4'          => 'includes/software/symfony4.conf',
         'yourls'            => 'includes/software/yourls.conf',
         'jekyll'            => 'includes/software/jekyll.conf',
+        'ssl'               => 'includes/general/ssl.conf',
+        'security'          => 'includes/general/security.conf',
     ),
 );

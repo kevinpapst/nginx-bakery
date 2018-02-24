@@ -284,11 +284,7 @@ function nginx_bakery_render_server(array $siteConfig)
                 break;
             case 'includes':
                 foreach($configValue as $incName) {
-                    $inc = $incName;
-                    if (isset($CONFIG['includes'][$incName])) {
-                        $inc = $CONFIG['includes'][$incName];
-                    }
-                    echo NXB_EOL . NXB_TAB . 'include' . ' ' . $inc . ';';
+                    nginx_bakery_render_include_tag($incName);
                 }
                 break;
             case '_project_key':
@@ -300,3 +296,14 @@ function nginx_bakery_render_server(array $siteConfig)
     }
     echo NXB_EOL;
 }
+
+function nginx_bakery_render_include_tag($name)
+{
+    global $CONFIG;
+
+    if (isset($CONFIG['includes'][$name])) {
+        $name = $CONFIG['includes'][$name];
+    }
+    echo NXB_EOL . NXB_TAB . 'include' . ' ' . $name . ';';
+}
+
