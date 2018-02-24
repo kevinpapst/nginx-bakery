@@ -15,6 +15,9 @@ return array(
         // external files being included while parsing can be defined by a key-value mapping of source => target directory
         'externals'     => array()
     ),
+    'options' => array(
+        'access_log' => 'off',
+    ),
     // full path to your certificates, change them to your needs and check certificates/README.md
     'certificates' => array(
         // we look for "default" only if no side specific certificate can be found

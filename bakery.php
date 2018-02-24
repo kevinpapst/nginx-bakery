@@ -80,7 +80,7 @@ foreach($r as $incFolder => $includes)
         ob_start();
 
         // do the magic
-        nginx_bakery_render_include(NXB_INC . $incFolder . '/' .$incFilename);
+        nginx_bakery_render_include($incFolder . '/' .$incFilename);
 
         // get output buffer and save it as "include" config file
         $incTarget = $includeTargetDir . '/' . $incFilename;
@@ -221,12 +221,12 @@ function nginx_bakery_render_include($filename)
     // $CONFIG might be used within the included nginx-include
     global $CONFIG;
 
-    if (!file_exists($filename)) {
+    if (!file_exists(NXB_INC . $filename)) {
         throw new Exception('Include does not exist: '.$filename);
     }
 
     echo NXB_EOL;
-    include $filename;
+    include NXB_INC . $filename;
     echo NXB_EOL;
 }
 
