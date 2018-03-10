@@ -201,7 +201,7 @@ function nginx_bakery_config_from_cookbook($cookbook, array $server, array $over
     array_walk_recursive($configBook, function(&$item, $key) use ($server) {
         if (preg_match("/\%(.*)\%/", $item, $matches)) {
             if(isset($server[$matches[1]])) {
-                $item = $server[$matches[1]];
+                $item = str_replace($matches[0], $server[$matches[1]], $item);
             }
         }
     });
