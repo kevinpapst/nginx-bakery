@@ -44,6 +44,7 @@ return array(
         'wordpress'     => 'cookbooks/wordpress.php',
         'php-fpm'       => 'cookbooks/php-fpm.php',
         'cdn'           => 'cookbooks/cdn.php',
+        'jekyll'        => 'cookbooks/jekyll-https.php',
     ),
     // server recipes, each one represents a server entry in your nginx config
     // this is a simple name-to-file mapping
