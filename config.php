@@ -85,6 +85,7 @@ return array(
         'symfony4'          => 'includes/software/symfony4.conf',
         'yourls'            => 'includes/software/yourls.conf',
         'jekyll'            => 'includes/software/jekyll.conf',
+        'freshrss'          => 'includes/software/freshrss.conf',
         'ssl'               => 'includes/general/ssl.conf',
         'security'          => 'includes/general/security.conf',
     ),
