@@ -69,6 +69,7 @@ return array(
         'php-fpm'           => 'includes/general/php-fpm.conf',
         'robots'            => 'includes/general/robots.conf',
         'empty'             => 'includes/general/empty.conf',
+        'no-logs'           => 'includes/general/no-logs.conf',
         'hide-headers'      => 'includes/general/hide-headers.conf',
         'bigace-v2'         => 'includes/software/bigace-v2.conf',
         'bigace-v3'         => 'includes/software/bigace-v3.conf',
