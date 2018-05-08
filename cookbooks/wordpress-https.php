@@ -24,7 +24,7 @@ return array(
             'root'              => '%root%',
             'index'             => 'index.php',
             'includes'          => array(
-                '%include_ssl%', 'favicon', 'wordpress', 'wordpress-phpfpm', 'wordpress-admin', 'cache-assets', 'htaccess', 'hide-headers'
+                '%include_ssl%', 'no-logs', 'favicon', 'wordpress', 'wordpress-phpfpm', 'wordpress-admin', 'cache-assets', 'htaccess', 'hide-headers'
             )
         ),
     ),

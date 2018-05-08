@@ -30,7 +30,7 @@ return array(
             'server_name'       => '%server_name%',
             'root'              => '%root%',
             'includes'          => array(
-                '%include_ssl%', 'htaccess', 'jekyll', 'favicon', 'cache-assets', 'hide-headers'
+                '%include_ssl%', 'no-logs', 'htaccess', 'jekyll', 'favicon', 'cache-assets', 'hide-headers'
             )
         ),
     ),
