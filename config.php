@@ -2,6 +2,8 @@
 /**
  * Configuration for nginx-bakery.
  *
+ * Every config in here can be overwritten in your own config.local.php file (see README)
+ *
  * @author Kevin Papst
  * @see https://github.com/kevinpapst/nginx-bakery
  */
