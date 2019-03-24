@@ -85,3 +85,17 @@ return [
     ],
 ];
 ```
+
+### Use a different PHP version
+
+So you are not using PHP 7.1 as configured in the default `config.php`? No problem, overwrite the key in your `config.local.php`:
+
+```php
+<?php
+return [
+    'options' => [
+        'php_fastcgi_pass' => 'unix:/run/php/php7.2-fpm.sock',
+    ],
+];
+```
+
