@@ -20,7 +20,7 @@ return array(
     'options' => array(
         'php_fastcgi_pass' => 'unix:/run/php/php7.1-fpm.sock',
         'php_open_basedir' => '/tmp/',
-        'access_log' => 'off',
+        'access_log' => '/dev/null',
     ),
     // full path to your certificates, change them to your needs and check certificates/README.md
     'certificates' => array(
